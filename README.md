@@ -1,2 +1,2 @@
-# NexusCC
+# ArkusNexusCC
 Code Challenge 
