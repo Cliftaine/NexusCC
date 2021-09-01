@@ -4,10 +4,10 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class User(AbstractUser ):
-    name= models.CharField(max_length = 50)
-    email = models.EmailField(max_length = 50, unique=True)
-    password= models.CharField(max_length = 50)
-    username=None
+    name= models.CharField(max_length = 255)
+    email = models.EmailField(max_length = 255, unique=True)
+    password= models.CharField(max_length = 255)
+    username= models.CharField(max_length = 255)
 
     USERNAME_FIELD = 'email'
 
@@ -15,15 +15,15 @@ class User(AbstractUser ):
 
 class Team(models.Model):
     #Team name
-    name = models.CharField(max_length = 50)
+    name = models.CharField(max_length = 255)
 
 class Accounts(models.Model):
     #
-    accountName= models.CharField(max_length = 50)
+    accountName= models.CharField(max_length = 255)
     #Client Name
-    clientName= models.CharField(max_length= 50)
+    clientName= models.CharField(max_length= 255)
     #Person in charge of operation
-    iCOperation= models.CharField(max_length= 50)
+    iCOperation= models.CharField(max_length= 255)
     #Team
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
 
