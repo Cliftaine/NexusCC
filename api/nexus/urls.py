@@ -9,8 +9,8 @@ router.register(r'movements', MovementsViewSet, basename= 'movements')
 router.register(r'users', UserView, basename= 'Users')
 
 urlpatterns = [
-        path('login', LoginView.as_view()),
-        path('logout', LogoutView.as_view())
+        path('login/', LoginView.as_view()),
+        path('logout/', LogoutView.as_view())
 ]
 
 urlpatterns+=router.urls

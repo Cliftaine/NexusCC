@@ -7,6 +7,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.authentication import get_authorization_header
 from .models import User
 from .serializers import UserTokenSerializer
+import os
 
 
 
@@ -14,12 +15,13 @@ class JWTAuthentication(BaseAuthentication):
 
     def authenticate(self, request):
         token = request.COOKIES.get('jwt')
-
+        #if os.environ.get("BYPASS"):
+        #    pass
         if not token:
             raise AuthenticationFailed('Unauthenticated!')
+        #if not os.environ.get("BYPASS"):
         try:
             payload = jwt.decode(token, 'secret', algorithm='HS256')
-
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed('Unauthenticated!')
 
@@ -51,8 +53,13 @@ class JWTAuthenticationDispatch(object):
         return None
 
     def dispatch(self, request, *args, **kwargs):
+        #print(os.environ.get("BYPASS"))
+        #if os.environ.get("BYPASS"):
+        #    return super().dispatch(request, *args, **kwargs)
 
         user = self.get_userData(request)
+
+
         if user is not None:
             return super().dispatch(request, *args, **kwargs)
  
