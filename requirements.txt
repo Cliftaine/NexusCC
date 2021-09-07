@@ -3,8 +3,9 @@ djangorestframework==3.12.4
 mysqlclient==1.4.6
 django-mysql==3.8.1
 
-
-djangorestframework-simplejwt==4.8.0
 drf-yasg2==1.19.4
+
+PyJWT==1.7.1
+django-cors-headers
 
 
