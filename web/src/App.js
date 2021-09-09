@@ -1,22 +1,43 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import './App.css';
-import { Container } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import PrivateRoute from './components/PrivateRoute';
+
 import Login from './components/Login';
 import Teams from './components/Teams';
-import TeamsList from './components/TeamsList';
+import TeamsLog from './components/TeamsLog';
+import Nabvar from './components/NavBar';
+import User from './components/User';
+import UserList from './components/UserList';
+import Accounts from './components/Accounts';
+import Landing from './components/Landing';
 
-const App = () => {
-  return (
-	<Fragment>
-	  <Container>
-		<Login/>
-		<TeamsList/>
-	  </Container>
-	  <Teams />
-	  <h1>Simon</h1>
 
-	</Fragment>
-  );
-}
+import { Provider } from 'react-redux';
+import store from './store';
+
+const App = () => (
+	<Provider store={store}>
+		<Router>
+			<Nabvar/>
+			<Container>
+				<Col className="justify-content-md-center">				
+					<Row className="justify-content-md-center" md="auto">
+						<Switch>
+							<PrivateRoute path='/accounts' component={Accounts} exact/>
+							<PrivateRoute path='/teamsLog' component={TeamsLog} exact/>
+							<PrivateRoute path='/teams' component={Teams} exact/>
+							<Route path='/login' component={Login} exact/>
+							<PrivateRoute path='/profile' component={User} exact/>
+							<PrivateRoute path='/users' component={UserList} exact/>
+							<PrivateRoute path='/' component={Landing} exact/>
+						</Switch>
+					</Row>
+				</Col>
+			</Container>
+		</Router>
+	</Provider>
+);
 
 export default App;
