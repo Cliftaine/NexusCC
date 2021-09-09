@@ -10,29 +10,8 @@ import {
   LOGOUT_SUCCESS,
 } from './types';
 
-// CHECK TOKEN & LOAD USER
-export const loadUser = () => (dispatch, getState) => {
-  // User Loading
-  dispatch({ type: USER_LOADING });
-
-  axios
-    .get('/login/', tokenConfig(getState))
-    .then((res) => {
-      dispatch({
-        type: USER_LOADED,
-        payload: res.data,
-      });
-    })
-    .catch((err) => {
-      dispatch(returnErrors(err.response.data, err.response.status));
-      dispatch({
-        type: AUTH_ERROR,
-      });
-    });
-};
-
 // LOGIN USER
-export const login = (username, password) => (dispatch) => {
+export const login = (email, password) => (dispatch) => {
   // Headers
   const config = {
     headers: {
@@ -41,7 +20,7 @@ export const login = (username, password) => (dispatch) => {
   };
 
   // Request Body
-  const body = JSON.stringify({ username, password });
+  const body = JSON.stringify({ email, password });
 
   axios
     .post('/login/', body, config)
@@ -52,7 +31,6 @@ export const login = (username, password) => (dispatch) => {
       });
     })
     .catch((err) => {
-      dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
         type: LOGIN_FAIL,
       });
@@ -64,13 +42,11 @@ export const logout = () => (dispatch, getState) => {
   axios
     .post('/logout/', null, tokenConfig(getState))
     .then((res) => {
-      dispatch({ type: 'CLEAR_LEADS' });
       dispatch({
         type: LOGOUT_SUCCESS,
       });
     })
     .catch((err) => {
-      dispatch(returnErrors(err.response.data, err.response.status));
     });
 };
 

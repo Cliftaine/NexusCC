@@ -26,26 +26,11 @@ export default class Landing extends Component {
 
 	render() {
 		return(
-			<Table striped bordered hover>
-				 <thead>
-					<tr>
-						<th>#</th>
-						<th>Equipo:</th>
-						<th>Nombre:</th>
-						<th>Inicio:</th>
-						<th>Fin:</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>1</td>
-						<td>Equipo Perron</td>
-						<td>El pepe</td>
-						<td>Fecha1</td>
-						<td>Fecha2</td>
-					</tr>
-				</tbody>
-			</Table>
+			<div>
+				<h3> 
+					LANDING
+				</h3>
+			</div>
 		);
 	}
 }
